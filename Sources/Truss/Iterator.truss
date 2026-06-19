@@ -1,0 +1,81 @@
+public struct _MapIterator<I: Iterator, F: (I.Item) -> T, T>: Iterator {
+    private let iterator: I
+    private let f: F
+    public func next() -> T? {
+        if let item = iterator.next() {
+            f(item)
+        } else {
+            null
+        }
+        
+    }
+}
+
+public struct _FilterIterator<I: Iterator, F: (I.Item) -> I.Item>: Iterator {
+    private let iterator: I
+    private let f: F
+    public func next() -> I.Item? {
+        loop {
+            guard let item = iterator.next() else {
+                return null
+            }
+            if f(item) {
+                return item
+            }
+        }
+    }
+}
+
+public struct _ZipIterator<I1: Iterator, I2: Iterator>: Iterator {
+    private let iterator1: I1
+    private let iterator2: I2
+    public func next() -> (I1.Item, I2.Item)? {
+        if let item1 = iterator1.next() && let item2 = iterator2.next() {
+            (item1, item2)
+        } else {
+            null
+        }
+    }
+}
+
+public struct _EnumeratedIterator<I: Iterator>: Iterator {
+    private let iterator: I
+    private var index: UInt64 = 0
+    public func next() -> (UInt64, I.Item)? {
+        if let item = iterator.next() {
+            (index++, item)
+        } else {
+            null
+        }
+    }
+}
+
+public protocol Iterator<Item> {
+    func next() -> Item?
+    func map<T>(f: (Item) -> T) -> _MapIterator {
+        _MapIterator(iterator: self, f: f)
+    }
+    func filter(f: (Item) -> Item) -> _FilterIterator {
+        _FilterIterator(iterator: self, f: f)
+    }
+    func zip<T>(_ other: Iterable<T>) -> _ZipIterator {
+        _ZipIterator(iterator1: self, iterator2: other.iterator)
+    }
+    func zip<T>(_ other: Iterator<T>) -> _ZipIterator {
+        _ZipIterator(iterator1: self, iterator2: other)
+    }
+    func enumerated() -> _EnumeratedIterator {
+        _EnumeratedIterator(iterator: self, f: f)
+    }
+    func collect() -> [Item] {
+        var result = [Item]()
+        while let item = next() {
+            result.append(item)
+        }
+        result
+    }
+}
+
+public protocol Iterable<Item> {
+    public var iterator: any Iterator<Item> { get }
+}

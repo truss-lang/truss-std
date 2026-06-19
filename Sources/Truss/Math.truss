@@ -1,0 +1,16 @@
+public module Math {
+    public func max<T>(_ a: T, _ b: T) -> T {
+        if a >= b {
+            a
+        } else {
+            b
+        }
+    }
+    public func min<T>(_ a: T, _ b: T) -> T {
+        if a <= b {
+            a
+        } else {
+            b
+        }
+    }
+}

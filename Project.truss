@@ -1,0 +1,10 @@
+let project = Project(
+    name: "Truss",
+    version: "0.1.0",
+    products: [
+        Product(name: "Truss", type: .Library(.Dynamic), targets: ["Truss"])
+    ],
+    targets: [
+        Target(name: "Truss")
+    ]
+)

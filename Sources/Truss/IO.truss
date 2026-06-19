@@ -1,0 +1,30 @@
+public extern "C" {
+    func printf(_ fmt: UInt8*, ...) -> Int32
+}
+
+public func print(_ str: String) {
+    printf(str.cString)
+}
+
+public module IO {
+#if os(linux) && arch(x86_64)
+    public extern "C" {
+        #[cname("open")]
+        func _open(_ path: UInt8*, _ flags: Int32, _ mode: Int32) -> Int32
+    }
+#endif
+    public class File {
+        public let path: String
+    #if os(linux) && arch(x86_64)
+        public let fd: Int32
+        public init(path: String) {
+            self.path = path
+            fd = _open(path.cString, 0x101, 0644)
+        }
+        public init(path: String, fd: Int32) {
+            self.path = path
+            self.fd = fd
+        }
+    #endif
+    }
+}

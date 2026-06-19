@@ -1,0 +1,128 @@
+public final class Array<T>: Iterable<T>, Clonable {
+    private static let DEFAULT_CAPACITY: UInt64 = 10
+    public private(set) var count: UInt64
+    public private(set) var capacity: UInt64
+    public private(set) var data: T*
+    public init() {
+        self.count = 0
+        self.capacity = 0
+        self.data = nullptr
+    }
+    public init(capacity: UInt64) {
+        self.count = 0
+        self.capacity = capacity
+        self.data = malloc(sizeof(T) * capacity)
+    }
+    /*
+    public init(repeating: T, count: UInt64) {
+        self.init(capacity: count)
+        self.count = count
+        for i in 0..<count {
+            data[i] = repeating
+        }
+    }
+    */
+    // This initializer is internal used for shallow cloning
+    private init(count: UInt64, capacity: UInt64, data: T*) {
+        self.count = count
+        self.capacity = capacity
+        self.data = data
+    }
+    deinit {
+        for i in 0..<count {
+            data[i].deinit()
+        }
+        free(data)
+    }
+    public subscript(index: UInt64) -> T {
+        get {
+            if index < count {
+                return data[index]
+            } else {
+                panic()
+            }
+        }
+        set {
+            insert(at: index, newValue)
+            newValue
+        }
+    }
+    public func append(_ element: T) {
+        ensureInitialized()
+        if count == capacity {
+            resize(capacity: capacity * 2)
+        }
+        data[count] = element
+        count++
+    }
+    // #[discardableResult]
+    public func insert(at index: UInt64, _ value: T) -> T? {
+        guard index >= 0 && index <= count else {
+            panic()
+        }
+        ensureInitialized()
+        if count == capacity {
+            resize(capacity: capacity * 2)
+        }
+        let old = if index < count { data[index] } else { null }
+        for i in range(from: count - 1, through: index, by: -1) {
+            data[i + 1] = data[i]
+        }
+        data[index] = value
+        ++count
+        return old
+    }
+    // #[discardableResult]
+    public func remove(at index: UInt64) -> T? {
+        guard capacity > 0 else {
+            panic()
+        }
+        guard index >= 0 && index <= count else {
+            panic()
+        }
+        let removedValue = array[index] 
+        for i in index..<count-1 {
+            array[i] = array[i + 1]
+        }
+        --count
+        array[count] = null
+        if count > 0 && count == capacity / 4 {
+            resize(capacity / 2)
+        }
+        removedValue
+    }
+    public var iterator: ArrayIterator {
+        ArrayIterator(arr: self)
+    }
+    public func clone() -> Self {
+        var data = malloc(sizeof(T) * self.count) as T*
+        for i in 0..<count {
+            data[i] = self.data[i]
+        }
+        Self(count: self.count, capacity: self.capacity, data: data)
+    }
+    private func ensureInitialized() {
+        if capacity == 0 {
+            capacity = DEFAULT_CAPACITY
+            data = malloc(sizeof(T) * DEFAULT_CAPACITY) as T*
+        }
+    }
+    public func resize(capacity newCapacity: UInt64) {
+        var newData = malloc(sizeof(T) * newCapacity) as T*
+        memcpy(dest: newData, src: self.data, count: sizeof(T) * Math.min(self.count, newCapacity))
+        free(self.data)
+        self.data = newData
+        self.capacity = newCapacity
+    }
+}
+
+public final class ArrayIterator<T> {
+    private let arr: [T]
+    private var index: UInt64 = 0
+    fileprivate init(arr: [T]) {
+        self.arr = arr
+    }
+    public func next() -> T? {
+        arr[index++]
+    }
+}

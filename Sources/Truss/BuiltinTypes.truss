@@ -1,0 +1,40 @@
+#[builtintype]
+public protocol Any {}
+
+#[builtintype]
+public protocol AnyObject: Any {}
+
+public protocol Number {}
+public protocol Integer: Number {}
+public protocol SignedInteger: Integer {}
+public protocol UnsignedInteger: Integer {}
+public protocol FloatType: Number {}
+
+#[builtintype]
+public struct Int8: SignedInteger {}
+#[builtintype]
+public struct Int16: SignedInteger {}
+#[builtintype]
+public struct Int32: SignedInteger {}
+#[builtintype]
+public struct Int64: SignedInteger {}
+#[builtintype]
+public struct Int128: SignedInteger {}
+#[builtintype]
+public struct UInt8: UnsignedInteger {}
+#[builtintype]
+public struct UInt16: UnsignedInteger {}
+#[builtintype]
+public struct UInt32: UnsignedInteger {}
+#[builtintype]
+public struct UInt64: UnsignedInteger {}
+#[builtintype]
+public struct UInt128: UnsignedInteger {}
+#[builtintype]
+public struct Float: FloatType {}
+#[builtintype]
+public struct Double: FloatType {}
+#[builtintype]
+public struct Bool {}
+#[builtintype]
+public struct Char {}

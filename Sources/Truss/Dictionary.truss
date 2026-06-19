@@ -1,0 +1,125 @@
+public protocol DictionaryProtocol<K: Hashable, V> {
+    subscript(key: K) -> V? { get set }
+    func insert(_ value: V, forKey key: K)
+    func remove(forKey key: K) -> V?
+    var isEmpty: Bool { get }
+    var keys: [K] { get }
+    var values: [V] { get }
+}
+public final class Dictionary<K: Hashable, V>: DictionaryProtocol<K, V> {
+    private var buckets: [[Entry]] = []
+    public private(set) var count: UInt64 = 0
+    
+    public init(capacity: UInt64 = 16) {
+        self.buckets = Array(repeating: [], count: capacity)
+    }
+
+    public subscript(key: K) -> V? {
+        get {
+            value(forKey: key)
+        }
+        set {
+            if let value = newValue {
+                insert(value, forKey: key)
+            } else {
+                removeValue(forKey: key)
+            }
+        }
+    }
+    
+    public func insert(_ value: V, forKey key: K) {
+        let idx = index(forKey: key)
+
+        for (i, entry) in buckets[idx].iterator.enumerated() {
+            if entry.key == key {
+                buckets[idx][i].value = value
+                return
+            }
+        }
+        
+        buckets[idx].append(Entry(key: key, value: value))
+        count += 1
+        
+        if (count as Double) / (buckets.count as Double) > 0.75 {
+            resize()
+        }
+    }
+    
+    public func index(forKey key: K) -> UInt64 {
+        return Math.abs(key.hashValue) % buckets.count
+    }
+    
+    public func value(forKey key: K) -> V? {
+        let idx = index(forKey: key)
+        
+        for entry in buckets[idx] {
+            if entry.key == key {
+                return entry.value
+            }
+        }
+        
+        return null
+    }
+    
+    public func remove(forKey key: K) -> V? {
+        let idx = index(forKey: key)
+        
+        for (i, entry) in buckets[idx].iterator.enumerated() {
+            if entry.key == key {
+                let removedValue = entry.value
+                buckets[idx].remove(at: i)
+                count -= 1
+                return removedValue
+            }
+        }
+        
+        return null
+    }
+    
+    public var isEmpty: Bool {
+        return count == 0
+    }
+    
+    public var keys: [K] {
+        var result: [K] = []
+        for bucket in buckets {
+            for entry in bucket {
+                result.append(entry.key)
+            }
+        }
+        return result
+    }
+    
+    public var values: [V] {
+        var result: [V] = []
+        for bucket in buckets {
+            for entry in bucket {
+                result.append(entry.value)
+            }
+        }
+        return result
+    }
+    
+    private func resize() {
+        let newCapacity = buckets.count * 2
+        var newBuckets = Array(repeating: [], count: newCapacity)
+        
+        for bucket in buckets {
+            for entry in bucket {
+                let newIndex = Math.abs(entry.key.hashValue) % newCapacity
+                newBuckets[newIndex].append(entry)
+            }
+        }
+        
+        buckets = newBuckets
+    }
+
+    public class Entry {
+        public let key: K
+        public fileprivate(set) var value: V
+        public init(key: K, value: V) {
+            self.key = key
+            self.value = value
+        }
+    }
+}
