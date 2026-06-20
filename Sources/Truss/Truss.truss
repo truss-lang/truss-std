@@ -5,6 +5,58 @@ public extern "C" {
     func memcpy(dest: Void*, src: Void*, count: UInt64)
 }
 
+public protocol AdditiveArithmetic {
+    func + (_ rhs: Self) -> Self
+    func - (_ rhs: Self) -> Self
+    static var zero: Self { get }
+}
+
+public protocol Numeric: AdditiveArithmetic {
+    func * (_ rhs: Self) -> Self
+    static var one: Self { get }
+}
+
+public protocol BitwiseOperations {
+    func | (_ rhs: Self) -> Self
+    func & (_ rhs: Self) -> Self
+    func ^ (_ rhs: Self) -> Self
+    prefix func ~ () -> Self
+    func << (_ rhs: Self) -> Self
+    func >> (_ rhs: Self) -> Self
+}
+
+public protocol Arithmetic: Numeric, BitwiseOperations {
+    func / (_ rhs: Self) -> Self
+    func % (_ rhs: Self) -> Self
+}
+
+public protocol Equatable {
+    func == (_ rhs: Self) -> Bool
+    func != (_ rhs: Self) -> Bool {
+        !(self == rhs)
+    }
+}
+
+public protocol Comparable: Equatable {
+    func > (_ rhs: Self) -> Bool
+    func >= (_ rhs: Self) -> Bool {
+        self > rhs || self == rhs
+    }
+    func < (_ rhs: Self) -> Bool
+    func <= (_ rhs: Self) -> Bool {
+        self < rhs || self == rhs
+    }
+    func compare(to rhs: Self) -> Int32 {
+        if self < rhs {
+            -1
+        } else if self == rhs {
+            0
+        } else {
+            1
+        }
+    }
+}
+
 public protocol Error {}
 
 public protocol Copyable {

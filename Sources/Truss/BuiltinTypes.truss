@@ -4,37 +4,544 @@ public protocol Any {}
 #[builtintype]
 public protocol AnyObject: Any {}
 
-public protocol Number {}
+public protocol Number: Comparable, Arithmetic {}
 public protocol Integer: Number {}
 public protocol SignedInteger: Integer {}
 public protocol UnsignedInteger: Integer {}
 public protocol FloatType: Number {}
 
 #[builtintype]
-public struct Int8: SignedInteger {}
+public struct Int8: SignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Int16: SignedInteger {}
+public struct Int16: SignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Int32: SignedInteger {}
+public struct Int32: SignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Int64: SignedInteger {}
+public struct Int64: SignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+
+}
 #[builtintype]
-public struct Int128: SignedInteger {}
+public struct Int128: SignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct UInt8: UnsignedInteger {}
+public struct UInt8: UnsignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct UInt16: UnsignedInteger {}
+public struct UInt16: UnsignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct UInt32: UnsignedInteger {}
+public struct UInt32: UnsignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct UInt64: UnsignedInteger {}
+public struct UInt64: UnsignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct UInt128: UnsignedInteger {}
+public struct UInt128: UnsignedInteger {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Float: FloatType {}
+public struct Float: FloatType {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Double: FloatType {}
+public struct Double: FloatType {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func * (_ rhs: Self) -> Self
+    #[autowired]
+    func / (_ rhs: Self) -> Self
+    #[autowired]
+    func % (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Bool {}
+public struct Bool: Equatable {
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+}
 #[builtintype]
-public struct Char {}
+public struct Char: Comparable, AdditiveArithmetic, BitwiseOperations {
+    #[autowired]
+    static var zero: Self { get }
+    #[autowired]
+    static var one: Self { get }
+    #[autowired]
+    func + (_ rhs: Self) -> Self
+    #[autowired]
+    func - (_ rhs: Self) -> Self
+    #[autowired]
+    func | (_ rhs: Self) -> Self
+    #[autowired]
+    func & (_ rhs: Self) -> Self
+    #[autowired]
+    func ^ (_ rhs: Self) -> Self
+    #[autowired]
+    prefix func ~ () -> Self
+    #[autowired]
+    func << (_ rhs: Self) -> Self
+    #[autowired]
+    func >> (_ rhs: Self) -> Self
+    #[autowired]
+    override func == (_ rhs: Self) -> Bool
+    #[autowired]
+    override func != (_ rhs: Self) -> Bool
+    #[autowired]
+    override func > (_ rhs: Self) -> Bool
+    #[autowired]
+    override func >= (_ rhs: Self) -> Bool
+    #[autowired]
+    override func < (_ rhs: Self) -> Bool
+    #[autowired]
+    override func <= (_ rhs: Self) -> Bool
+}
