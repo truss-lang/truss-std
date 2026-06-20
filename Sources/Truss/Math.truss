@@ -1,12 +1,12 @@
 public module Math {
-    public func max<T>(_ a: T, _ b: T) -> T {
+    public func max<T: Comparable>(_ a: T, _ b: T) -> T {
         if a >= b {
             a
         } else {
             b
         }
     }
-    public func min<T>(_ a: T, _ b: T) -> T {
+    public func min<T: Comparable>(_ a: T, _ b: T) -> T {
         if a <= b {
             a
         } else {
