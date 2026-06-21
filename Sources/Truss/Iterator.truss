@@ -11,7 +11,7 @@ public struct _MapIterator<I: Iterator, F: (I.Item) -> T, T>: Iterator {
     }
 }
 
-public struct _FilterIterator<I: Iterator, F: (I.Item) -> I.Item>: Iterator {
+public struct _FilterIterator<I: Iterator, F: (I.Item) -> Bool>: Iterator {
     private let iterator: I
     private let f: F
     public func next() -> I.Item? {
