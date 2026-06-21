@@ -41,6 +41,9 @@ public struct _ZipIterator<I1: Iterator, I2: Iterator>: Iterator {
 public struct _EnumeratedIterator<I: Iterator>: Iterator {
     private let iterator: I
     private var index: UInt64 = 0
+    public init(iterator: I) {
+        self.iterator = iterator
+    }
     public func next() -> (UInt64, I.Item)? {
         if let item = iterator.next() {
             (index++, item)
@@ -65,7 +68,7 @@ public protocol Iterator<Item> {
         _ZipIterator(iterator1: self, iterator2: other)
     }
     func enumerated() -> _EnumeratedIterator {
-        _EnumeratedIterator(iterator: self, f: f)
+        _EnumeratedIterator(iterator: self)
     }
     func collect() -> [Item] {
         var result = [Item]()
