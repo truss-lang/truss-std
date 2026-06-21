@@ -116,7 +116,7 @@ public final class Array<T>: Iterable<T>, Clonable {
     }
 }
 
-public final class ArrayIterator<T> {
+public final class ArrayIterator<T>: Iterator<T> {
     private let arr: [T]
     private var index: UInt64 = 0
     fileprivate init(arr: [T]) {
