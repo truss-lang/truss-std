@@ -1,0 +1,55 @@
+public final class String {
+    public let raw: UInt8*
+    private let _size: UInt64
+    private let _length: UInt64
+    public var length: UInt64 { _length }
+    public var chars: [Char] {
+        let arr = []
+        var i = 0
+        while i < _length {
+            arr.append()
+        }
+        arr
+    }
+    public var cString: UInt8* {
+        var _raw = malloc(_size) as UInt8*
+        memcpy(dest: _raw, src: raw, count: _size)
+        _raw
+    }
+    #[internalUsed]
+    private init?(_ raw: UInt8*, _ size: UInt64) {
+        var _raw = malloc(size + 1) as UInt8*
+        memcpy(dest: _raw, src: raw, count: size)
+        _raw[size] = '\0'
+        self.raw = _raw
+        self._size = size + 1
+        self._length = do {
+            var count = 0;
+            var i: UInt64 = 0
+            while i < size {
+                let c = _raw[i]
+                if ((c & 0xC0) == 0x80) {
+                    ++count
+                } else if ((c & 0x80) == 0) {
+                    ++count
+                    ++i
+                } else {
+                    ++count;
+                    i += if ((c & 0xE0) == 0xC0) {
+                            1
+                        } else if ((c & 0xF0) == 0xE0) {
+                            2
+                        } else if ((c & 0xF8) == 0xF0) {
+                            3
+                        } else {
+                            return null
+                        }
+                }
+                ++i
+            }
+        }
+    }
+    deinit {
+        free(raw)
+    }
+}
