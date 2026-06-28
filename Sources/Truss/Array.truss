@@ -11,7 +11,7 @@ public final class Array<T>: Iterable<T>, Clonable {
     public init(capacity: UInt64) {
         self.count = 0
         self.capacity = capacity
-        self.data = malloc(sizeof(T) * capacity)
+        self.data = malloc(sizeof(T) * capacity) as T*
     }
     /*
     public init(repeating: T, count: UInt64) {
@@ -31,6 +31,7 @@ public final class Array<T>: Iterable<T>, Clonable {
     deinit {
         for i in 0..<count {
             data[i].deinit()
+            data[i].deallocate()
         }
         free(data)
     }
@@ -65,7 +66,7 @@ public final class Array<T>: Iterable<T>, Clonable {
             resize(capacity: capacity * 2)
         }
         let old = if index < count { data[index] } else { null }
-        for i in range(from: count - 1, through: index, by: -1) {
+        for i in range(from: count - 1, to: index, by: -1) {
             data[i + 1] = data[i]
         }
         data[index] = value
@@ -80,14 +81,14 @@ public final class Array<T>: Iterable<T>, Clonable {
         guard index >= 0 && index <= count else {
             panic()
         }
-        let removedValue = array[index] 
+        let removedValue = data[index] 
         for i in index..<count-1 {
-            array[i] = array[i + 1]
+            data[i] = data[i + 1]
         }
         --count
         array[count] = null
         if count > 0 && count == capacity / 4 {
-            resize(capacity / 2)
+            resize(capacity: capacity / 2)
         }
         removedValue
     }

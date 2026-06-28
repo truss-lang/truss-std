@@ -13,4 +13,11 @@ public module Math {
             b
         }
     }
+    public func abs<T: AdditiveArithmetic & Comparable>(_ value: T) -> T {
+        if value >= 0 {
+            value
+        } else {
+            -value
+        }
+    }
 }

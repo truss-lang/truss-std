@@ -1,5 +1,8 @@
 #[builtintype]
-public protocol Any {}
+public protocol Any {
+    #[autowired]
+    func deallocate()
+}
 
 #[builtintype]
 public protocol AnyObject: Any {}

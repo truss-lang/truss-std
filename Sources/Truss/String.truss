@@ -7,7 +7,7 @@ public final class String {
         let arr = []
         var i = 0
         while i < _length {
-            arr.append()
+            arr.append('\0')
         }
         arr
     }

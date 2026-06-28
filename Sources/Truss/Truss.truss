@@ -72,6 +72,10 @@ public protocol Hashable {
     var hashValue: Int32 { get }
 }
 
+public protocol Describable {
+    var description: String { get }
+}
+
 public protocol Deref<T> {
     func deref() -> T
 }

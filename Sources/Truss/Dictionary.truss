@@ -22,7 +22,7 @@ public final class Dictionary<K: Hashable, V>: DictionaryProtocol<K, V> {
             if let value = newValue {
                 insert(value, forKey: key)
             } else {
-                removeValue(forKey: key)
+                remove(forKey: key)
             }
         }
     }
