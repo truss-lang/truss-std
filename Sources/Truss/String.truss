@@ -58,6 +58,6 @@ public final class String {
         let newRaw = malloc(newSize) as UInt8*
         memcpy(dest: newRaw, src: raw, count: self._size - 1)
         memcpy(dest: newRaw + self._size - 1, src: rhs.raw, count: rhs._size)
-        Self(newRaw, newSize)!!
+        Self(newRaw, newSize)!
     }
 }
