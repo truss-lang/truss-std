@@ -2,6 +2,6 @@ let project = Project(
     name: "Truss",
     version: "0.1.0",
     targets: [
-        Target(name: "Truss")
+        Target(name: "Truss"),
     ]
 )
